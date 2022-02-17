@@ -13,6 +13,8 @@ class Alternatif extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
+
     public function getPekerjaanOrtu()
     {
         return $this->belongsTo(PekerjaanOrtu::class,'K01');

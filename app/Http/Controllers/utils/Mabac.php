@@ -12,7 +12,7 @@ class Mabac
     public $matrik_retimbang=[];
     public $matrik_perbatasan=[];
     public $matrik_Q=[];
-    public $matrik_rangking=[];
+    public $hasil_rangking=[];
 
     private $max_bobot = [];
     private $min_bobot = [];

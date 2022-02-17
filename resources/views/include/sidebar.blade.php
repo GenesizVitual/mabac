@@ -22,7 +22,7 @@
     </ul>
     <ul class="sidebar-menu">
        <li class="menu-header">Perengkingan</li>
-        <li><a class="nav-link" href="#"><i class="far fa-user"></i>
+        <li><a class="nav-link" href="{{url('penentuan-kriteria')}}"><i class="far fa-user"></i>
                 <span>Formulir Penentuan kriteria</span></a></li>
         <li><a class="nav-link" href="#"><i class="far fa-group"></i>
                 <span>Laporan</span></a></li>

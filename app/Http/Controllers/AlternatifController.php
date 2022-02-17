@@ -23,9 +23,9 @@ class AlternatifController extends Controller
         $penghasilan = PenghasilanOrtu::all();
         $tanggungan = Tanggungan::all();
         $alternatif = Alternatif::all();
-        dd($this->RunMetode());
+        $mabac = $this->RunMetode();
         $method = 'post';
-        return view('alternatif.index', compact(['siswa','pekerjaan','penghasilan','tanggungan','alternatif','method']));
+        return view('alternatif.index', compact(['siswa','pekerjaan','penghasilan','tanggungan','alternatif','method','mabac']));
     }
     
     
@@ -37,8 +37,9 @@ class AlternatifController extends Controller
         $tanggungan = Tanggungan::all();
         $alternatif = Alternatif::all();
         $alternatif_dipilih = Alternatif::findOrFail($id);
+        $mabac = $this->RunMetode();
         $method = 'put';
-        return view('alternatif.index', compact(['siswa','pekerjaan','penghasilan','tanggungan','alternatif','alternatif_dipilih','method']));
+        return view('alternatif.index', compact(['siswa','pekerjaan','penghasilan','tanggungan','alternatif','alternatif_dipilih','method','mabac']));
     }
 
     public function store(Request $req)
@@ -87,5 +88,19 @@ class AlternatifController extends Controller
         }
     }
 
+
+    public function preview()
+    {
+        $siswa = Student::all();
+        $mabac = $this->RunMetode();
+        return view('laporan.index', compact(['siswa','mabac']));
+    }
+    
+    public function cetak()
+    {
+        $siswa = Student::all();
+        $mabac = $this->RunMetode();
+        return view('laporan.print', compact(['siswa','mabac']));
+    }
     
 }

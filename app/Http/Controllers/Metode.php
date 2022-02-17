@@ -5,6 +5,10 @@ use App\Http\Controllers\utils\Mabac;
 
 trait Metode{
 
+    public function sortByOrder($a, $b) {
+        return $a['order'] - $b['order'];
+    }
+
     public function RunMetode()
     {
         # code...
@@ -16,6 +20,7 @@ trait Metode{
         $matrik_perbatasan = $metode->matrik_perbatasan;
         $matrik_Q = $metode->matrik_Q;
         $matrik_rangking = $metode->hasil_rangking;
+        arsort($matrik_rangking);
         return [
             'bobot_alternatif'=>$bobot_alternatif,
             'matrix_normalisasi'=>$matrix_normalisasi,

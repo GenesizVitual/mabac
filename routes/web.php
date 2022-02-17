@@ -26,3 +26,9 @@ Route::resource('pekerjaan-ortu', PekerjaanOrtuController::class);
 Route::resource('penghasilan-ortu', PenghasilanOrtuController::class);
 Route::resource('tanggungan', TanggunganController::class);
 Route::resource('penentuan-kriteria', AlternatifController::class);
+Route::get('laporan-perengkingan',[AlternatifController::class,'preview']);
+Route::get('cetak-perengkingan',[AlternatifController::class,'cetak']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

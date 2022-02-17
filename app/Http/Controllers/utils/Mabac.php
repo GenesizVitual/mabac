@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\utils;
 
 use App\Models\Alternatif;
+use App\Models\Student;
 
 class Mabac
 {

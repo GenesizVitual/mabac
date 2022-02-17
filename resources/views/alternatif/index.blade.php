@@ -13,7 +13,9 @@
                             <h4 class="card-title">Input kriteria</h4>
                         </div>
                         <div class="card-body">
-                            <form action="@if(!empty($alternatif_dipilih)) {{url('penentuan-kriteria/'.$alternatif_dipilih->id)}} @else {{url('penentuan-kriteria')}} @endif" method="post">
+                            <form
+                                action="@if (!empty($alternatif_dipilih)) {{ url('penentuan-kriteria/' . $alternatif_dipilih->id) }} @else {{ url('penentuan-kriteria') }} @endif"
+                                method="post">
                                 @method($method)
                                 {{ csrf_field() }}
                                 <div class="row">
@@ -24,7 +26,9 @@
                                                 @if (!empty($siswa))
                                                     <option value="">Silahkan pilih nama siswa</option>
                                                     @foreach ($siswa as $item)
-                                                        <option value="{{ $item->id }}" @if(!empty($alternatif_dipilih)) @if($item->id==$alternatif_dipilih->AL) selected @endif @endif>{{ $item->name }}</option>
+                                                        <option value="{{ $item->id }}"
+                                                            @if (!empty($alternatif_dipilih)) @if ($item->id == $alternatif_dipilih->AL) selected @endif
+                                                            @endif>{{ $item->name }}</option>
                                                     @endforeach
                                                 @else
                                                     <option value="">Belum ada data siswa</option>
@@ -40,7 +44,9 @@
                                                 @if (!empty($pekerjaan))
                                                     <option value="">Silahkan pilih pekerjaan orang tua</option>
                                                     @foreach ($pekerjaan as $item)
-                                                        <option value="{{ $item->id }}" @if(!empty($alternatif_dipilih)) @if($item->id==$alternatif_dipilih->K01) selected @endif @endif>{{ $item->pekerjaan }}
+                                                        <option value="{{ $item->id }}"
+                                                            @if (!empty($alternatif_dipilih)) @if ($item->id == $alternatif_dipilih->K01) selected @endif
+                                                            @endif>{{ $item->pekerjaan }}
                                                         </option>
                                                     @endforeach
                                                 @else
@@ -57,7 +63,9 @@
                                                 @if (!empty($penghasilan))
                                                     <option value="">Silahkan pilih penghasilan orang tua</option>
                                                     @foreach ($penghasilan as $item)
-                                                        <option value="{{ $item->id }}"  @if(!empty($alternatif_dipilih)) @if($item->id==$alternatif_dipilih->K02) selected @endif @endif>{{ $item->penghasilan }}
+                                                        <option value="{{ $item->id }}"
+                                                            @if (!empty($alternatif_dipilih)) @if ($item->id == $alternatif_dipilih->K02) selected @endif
+                                                            @endif>{{ $item->penghasilan }}
                                                         </option>
                                                     @endforeach
                                                 @else
@@ -74,7 +82,9 @@
                                                 @if (!empty($tanggungan))
                                                     <option value="">Silahkan pilih tanggungan orang tua</option>
                                                     @foreach ($tanggungan as $item)
-                                                        <option value="{{ $item->id }}" @if(!empty($alternatif_dipilih)) @if($item->id==$alternatif_dipilih->K03) selected @endif @endif>{{ $item->tanggungan }}
+                                                        <option value="{{ $item->id }}"
+                                                            @if (!empty($alternatif_dipilih)) @if ($item->id == $alternatif_dipilih->K03) selected @endif
+                                                            @endif>{{ $item->tanggungan }}
                                                         </option>
                                                     @endforeach
                                                 @else
@@ -86,12 +96,12 @@
                                     </div>
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-info">Simpan</button>
-                                        @if(!empty(Session::get('message_success')))
-                                            <p style="color: green">{{Session::get('message_success')}}</p>
+                                        @if (!empty(Session::get('message_success')))
+                                            <p style="color: green">{{ Session::get('message_success') }}</p>
                                         @endif
-                                        
-                                        @if(!empty(Session::get('message_fail')))
-                                            <p style="color: red">{{Session::get('message_fail')}}</p>
+
+                                        @if (!empty(Session::get('message_fail')))
+                                            <p style="color: red">{{ Session::get('message_fail') }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -155,10 +165,13 @@
                                                                 <td>{{ $data->getPenghasilanOrtu->penghasilan }}</td>
                                                                 <td>{{ $data->getTanggungan->tanggungan }}</td>
                                                                 <td>
-                                                                    <form action="{{url('penentuan-kriteria/'.$data->id)}}" method="post">
+                                                                    <form
+                                                                        action="{{ url('penentuan-kriteria/' . $data->id) }}"
+                                                                        method="post">
                                                                         @method('delete')
                                                                         {{ csrf_field() }}
-                                                                        <a href="{{url('penentuan-kriteria/'.$data->id.'/edit')}}" class="btn btn-warning">ubah</a>
+                                                                        <a href="{{ url('penentuan-kriteria/' . $data->id . '/edit') }}"
+                                                                            class="btn btn-warning">ubah</a>
                                                                         <button type="submit" class="btn btn-danger"
                                                                             onclick="return confirm('Apakah anda akan menghapus data kriteria ini ...?')">hapus</button>
                                                                     </form>
@@ -177,22 +190,136 @@
                                 </div>
                                 <div class="tab-pane fade" id="alternatif" role="tabpanel"
                                     aria-labelledby="alternatif-tab">
-                                    alternatif
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Nama</th>
+                                                <th>K01</th>
+                                                <th>K02</th>
+                                                <th>K03</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (!empty($mabac['bobot_alternatif']))
+                                                @foreach ($mabac['bobot_alternatif'] as $data)
+                                                    <tr>
+                                                        <td>{{ $data['Kode'] }}</td>
+                                                        <td>{{ $data['name'] }}</td>
+                                                        <td>{{ $data['K01'] }}</td>
+                                                        <td>{{ $data['K02'] }}</td>
+                                                        <td>{{ $data['K03'] }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="normalisasi" role="tabpanel"
                                     aria-labelledby="normalisasi-tab">
-                                    romalisasi
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>K01</th>
+                                                <th>K02</th>
+                                                <th>K03</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{dd($mabac)}} --}}
+                                            @if (!empty($mabac['matrix_normalisasi']))
+                                                @foreach ($mabac['matrix_normalisasi'] as $key => $data)
+                                                    <tr>
+                                                        <td>{{ $key }}</td>
+                                                        @foreach ($data as $item)
+                                                            <th>{{ $item }}</th>
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="tertimbang" role="tabpanel"
                                     aria-labelledby="tertimbang-tab">
-                                    tertimbang
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>K01</th>
+                                                <th>K02</th>
+                                                <th>K03</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{dd($mabac)}} --}}
+                                            @if (!empty($mabac['matrik_retimbang']))
+                                                @foreach ($mabac['matrik_retimbang'] as $key => $data)
+                                                    <tr>
+                                                        <td>{{ $key }}</td>
+                                                        @foreach ($data as $item)
+                                                            <th>{{ $item }}</th>
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="q" role="tabpanel" aria-labelledby="q-tab">
-                                    matrix q
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>K01</th>
+                                                <th>K02</th>
+                                                <th>K03</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{dd($mabac)}} --}}
+                                            @if (!empty($mabac['matrik_Q']))
+                                                @foreach ($mabac['matrik_Q'] as $key => $data)
+                                                    <tr>
+                                                        <td>{{ $key }}</td>
+                                                        @foreach ($data as $item)
+                                                            <th>{{ $item }}</th>
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="perengkingan" role="tabpanel"
                                     aria-labelledby="perengkingan-tab">
-                                    perengkingan
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Nama</th>
+                                                <th>Rangking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{dd($mabac)}} --}}
+                                            @if (!empty($mabac['matrik_rangking']))
+                                                @foreach ($mabac['matrik_rangking'] as $key => $item)
+                                                    <tr>
+                                                        <td>{{ $key }}</td>
+                                                        <td>{{ $siswa->where('kode', $key)->first()->name }}</td>
+                                                        <td>{{ $item }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\PekerjaanOrtuController;
 use App\Http\Controllers\PenghasilanOrtuController;
 use App\Http\Controllers\TanggunganController;
 use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +19,11 @@ use App\Http\Controllers\AlternatifController;
 */
 
 Route::get('/', function(){
-    return view('dashboard.index');
+    return view('login');
 });
+
+Route::post('/', [AuthController::class,'post']);
+Route::get('logout', [AuthController::class,'logout']);
 
 Route::resource('siswa', SiswaController::class);
 Route::resource('pekerjaan-ortu', PekerjaanOrtuController::class);
